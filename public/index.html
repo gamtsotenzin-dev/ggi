@@ -508,6 +508,19 @@ footer.g-foot .g-foot-copy { margin-top: 24px; padding-top: 16px; border-top: 1p
 @media (max-width: 560px) { .corner-bubble { max-width: 170px; font-size: .9rem; margin-bottom: 36px; } .corner-gigi { width: 70px; height: 80px; } }
 @media (prefers-reduced-motion: reduce) { .corner-bubble, .corner-gigi .eye, .g-gigi-art .eye, .g-gigi-art .spark { animation: none; } }
 body[data-mode="site"] footer.g-foot { padding-bottom: 120px; }
+/* Ads hidden until AdSense is approved */
+.layout.no-ads { grid-template-columns: minmax(0, 1fr); }
+.layout.no-ads .ads { display: none; }
+/* Instagram */
+.ig-ico { width: 1.15em; height: 1.15em; vertical-align: -.2em; margin-right: 6px; flex: none; }
+.ig-link { display: inline-flex; align-items: center; }
+.ig-band { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 16px 20px; border-radius: var(--radius); background: var(--band); color: var(--on-band); text-decoration: none; }
+.ig-band .ig-ico { width: 34px; height: 34px; margin: 0; }
+.ig-band > span { display: grid; gap: 2px; flex: 1; min-width: 200px; }
+.ig-band b { font-family: var(--g-display); font-weight: 800; font-size: 1.15rem; }
+.ig-band > span > span { color: var(--on-band-soft); }
+.ig-band em { font-style: normal; font-weight: 800; color: var(--on-band); overflow-wrap: anywhere; }
+.ig-band:hover em { text-decoration: underline; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 
@@ -608,7 +621,8 @@ body[data-mode="site"] footer.g-foot { padding-bottom: 120px; }
   </div>
 </nav>
 <div class="wrap">
-  <div class="layout">
+  <!-- ADS: remove the "no-ads" class below to show the ad boxes again (after AdSense approval) -->
+  <div class="layout no-ads">
     <main id="main">
       <section class="stage" id="stage" aria-live="polite">
         <div class="mascot" id="mascot" data-pose="waiting" aria-hidden="true">
@@ -900,7 +914,7 @@ body[data-mode="site"] footer.g-foot { padding-bottom: 120px; }
     <div><h3 data-t="footLinks">Explore</h3><ul>
       <li><a href="#about" data-t="navAbout">About us</a></li><li><a href="#team" data-t="navTeam">Our team</a></li><li><a href="#work" data-t="navWork">Our work</a></li>
       <li><a href="#start" data-t="navGigi">Gigi</a></li><li><a href="#guides" data-t="navGuides">Guides</a></li></ul></div>
-    <div><h3 data-t="footContact">Get in touch</h3><ul><li><a href="#contact" data-t="navContact">Contact us</a></li><li><span class="ph" data-t="emailSoon">[email coming soon]</span></li></ul></div>
+    <div><h3 data-t="footContact">Get in touch</h3><ul><li><a href="#contact" data-t="navContact">Contact us</a></li><li><a href="mailto:granitegiving603@gmail.com" data-t="emailSoon">granitegiving603@gmail.com</a></li><li><a class="ig-link" href="https://www.instagram.com/granitegivinginitiative/" target="_blank" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@granitegivinginitiative</a></li></ul></div>
   </div>
   <div class="wrap g-foot-copy"><span data-t="footCopy">© 2026 Granite Giving Initiative. A student project in New Hampshire.</span></div>
 </footer>
@@ -1043,6 +1057,7 @@ body[data-mode="site"] footer.g-foot { padding-bottom: 120px; }
 </svg></template>
 
 <div class="toast" id="toast" hidden></div>
+<script src="contact-key.js"></script>
 <script>
 /* Real-site connection: replaces the Claude-only features with the site's own server and the browser. */
 (function () {
@@ -1369,7 +1384,8 @@ const SITE_STR = {
     soon: "Coming soon", placeholder: "Placeholder",
     footAbout: "We plan and run fundraising events for New Hampshire nonprofits, so they can focus on their missions.",
     footLinks: "Explore", footContact: "Get in touch", footCopy: "© 2026 Granite Giving Initiative. A student project in New Hampshire.",
-    emailSoon: "[email coming soon]",
+    emailSoon: "granitegiving603@gmail.com",
+    cSending: "Sending...", cSent: "Thanks, {name}! We got your message and will get back to you soon.", cFail: "Hmm, that didn't send. Please try again, or email us at {email}.",
 
     hEyebrow: "Student-led · New Hampshire",
     hTitle: "Helping New Hampshire nonprofits raise more, with less stress.",
@@ -1431,7 +1447,7 @@ const SITE_STR = {
     cMsg: "Message", cSend: "Send message",
     cNotLive: "Thanks, {name}! This form isn't connected yet. It will start sending messages when our real website launches. Until then, please email us at {email}.",
     cNeed: "Please add your name, email and a message.",
-    cOther: "Other ways to reach us", cEmailLbl: "Email", cSocialLbl: "Social media", cSocialSoon: "[social links coming soon]",
+    cOther: "Other ways to reach us", cEmailLbl: "Email", cSocialLbl: "Social media", cSocialSoon: "[social links coming soon]", igFollow: "Follow us on Instagram", igSee: "See our events and behind-the-scenes on Instagram.",
     cGigi: "Looking for help with your own fundraiser right now?", cGigiBtn: "Ask Gigi"
   },
   es: {
@@ -1442,7 +1458,8 @@ const SITE_STR = {
     soon: "Próximamente", placeholder: "Pendiente",
     footAbout: "Planeamos y organizamos eventos de recaudación para organizaciones sin fines de lucro de New Hampshire, para que puedan enfocarse en su misión.",
     footLinks: "Explorar", footContact: "Contacto", footCopy: "© 2026 Granite Giving Initiative. Un proyecto estudiantil de New Hampshire.",
-    emailSoon: "[correo próximamente]",
+    emailSoon: "granitegiving603@gmail.com",
+    cSending: "Enviando...", cSent: "¡Gracias, {name}! Recibimos tu mensaje y te responderemos pronto.", cFail: "Mmm, no se envió. Inténtalo de nuevo o escríbenos a {email}.",
 
     hEyebrow: "Dirigido por estudiantes · New Hampshire",
     hTitle: "Ayudamos a las organizaciones de New Hampshire a recaudar más, con menos estrés.",
@@ -1504,7 +1521,7 @@ const SITE_STR = {
     cMsg: "Mensaje", cSend: "Enviar mensaje",
     cNotLive: "¡Gracias, {name}! Este formulario todavía no está conectado. Empezará a enviar mensajes cuando se lance nuestro sitio web real. Mientras tanto, escríbenos a {email}.",
     cNeed: "Por favor agrega tu nombre, tu correo y un mensaje.",
-    cOther: "Otras formas de contactarnos", cEmailLbl: "Correo", cSocialLbl: "Redes sociales", cSocialSoon: "[redes sociales próximamente]",
+    cOther: "Otras formas de contactarnos", cEmailLbl: "Correo", cSocialLbl: "Redes sociales", cSocialSoon: "[redes sociales próximamente]", igFollow: "Síguenos en Instagram", igSee: "Mira nuestros eventos y lo que pasa detrás de cámaras en Instagram.",
     cGigi: "¿Necesitas ayuda con tu propia recaudación ahora mismo?", cGigiBtn: "Pregúntale a Gigi"
   }
 };
@@ -1560,7 +1577,8 @@ function siteHome() {
       <div><p class="g-eyebrow">${esc(t("gigiEyebrow"))}</p><h2 class="g-h2">${esc(t("gigiTitle"))}</h2><p class="g-prose-p">${esc(t("gigiText"))}</p>
         <div class="actions"><a class="g-btn gigi" href="#start">${esc(t("gigiBtn"))}</a><a class="g-link" href="#guides">${esc(t("gigiGuides"))} →</a></div></div>
     </div>`)}
-  ${sec(t("waysEyebrow"), t("waysTitle"), `<div class="ways">${ways}</div>`, "tint")}`;
+  ${sec(t("waysEyebrow"), t("waysTitle"), `<div class="ways">${ways}</div>
+    <a class="ig-band" href="https://www.instagram.com/granitegivinginitiative/" target="_blank" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg><span><b>${esc(t("igFollow"))}</b><span>${esc(t("igSee"))}</span></span><em>@granitegivinginitiative →</em></a>`, "tint")}`;
 }
 
 function peaks() {
@@ -1631,24 +1649,51 @@ function siteContact() {
           <label class="lab" for="cf-am">${esc(t("cAm"))}<select class="field" id="cf-am">${opts}</select></label>
         </div>
         <label class="lab" for="cf-msg">${esc(t("cMsg"))}<textarea class="field" id="cf-msg"></textarea></label>
-        <div class="actions"><button class="g-btn" type="submit">${esc(t("cSend"))}</button></div>
+        <input type="checkbox" name="botcheck" id="cf-bot" tabindex="-1" autocomplete="off" hidden>
+        <div class="actions"><button class="g-btn" type="submit" id="cf-send">${esc(t("cSend"))}</button></div>
         <div class="c-note" id="cNote" hidden></div>
       </form>
       <aside class="c-side">
         <h3>${esc(t("cOther"))}</h3>
-        <dl class="dl"><dt>${esc(t("cEmailLbl"))}</dt><dd>${PH(t("emailSoon"))}</dd><dt>${esc(t("cSocialLbl"))}</dt><dd>${PH(t("cSocialSoon"))}</dd></dl>
+        <dl class="dl"><dt>${esc(t("cEmailLbl"))}</dt><dd><a class="g-link" href="mailto:${esc(t("emailSoon"))}">${esc(t("emailSoon"))}</a></dd><dt>${esc(t("cSocialLbl"))}</dt><dd><a class="g-link ig-link" href="https://www.instagram.com/granitegivinginitiative/" target="_blank" rel="noopener"><svg class="ig-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>@granitegivinginitiative</a></dd></dl>
         <div class="c-gigi"><p>${esc(t("cGigi"))}</p><a class="g-btn gigi small" href="#start">${esc(t("cGigiBtn"))}</a></div>
       </aside>
     </div>`, "first");
 }
 function wireContact() {
   const f = document.getElementById("cForm"); if (!f) return;
-  f.onsubmit = e => {
+  let sending = false;
+  f.onsubmit = async e => {
     e.preventDefault();
+    if (sending) return;
     const name = f.querySelector("#cf-name").value.trim(), email = f.querySelector("#cf-email").value.trim(), msg = f.querySelector("#cf-msg").value.trim();
     const note = document.getElementById("cNote"); note.hidden = false;
     if (!name || !email || !msg) { note.className = "c-note warn"; note.textContent = t("cNeed"); return; }
-    note.className = "c-note"; note.textContent = t("cNotLive").replace("{name}", name).replace("{email}", t("emailSoon"));
+    const key = window.GGI_FORM_KEY;
+    if (!key || /PASTE/.test(key)) { note.className = "c-note"; note.textContent = t("cNotLive").replace("{name}", name).replace("{email}", t("emailSoon")); return; }
+    if (f.querySelector("#cf-bot").checked) return;
+    const am = f.querySelector("#cf-am"), btn = f.querySelector("#cf-send");
+    sending = true; btn.disabled = true; note.className = "c-note"; note.textContent = t("cSending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: key,
+          subject: "New message from the GGI website: " + am.options[am.selectedIndex].text,
+          from_name: "Granite Giving Initiative website",
+          name, email, replyto: email,
+          organization: f.querySelector("#cf-org").value.trim() || "(not given)",
+          i_am: am.options[am.selectedIndex].text,
+          message: msg
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.success === false) throw new Error(data.message || "HTTP " + res.status);
+      note.textContent = t("cSent").replace("{name}", name);
+      f.querySelector("#cf-msg").value = "";
+    } catch (err) {
+      note.className = "c-note warn"; note.textContent = t("cFail").replace("{email}", t("emailSoon"));
+    } finally { sending = false; btn.disabled = false; }
   };
 }
 document.addEventListener("click", e => {
@@ -1739,7 +1784,7 @@ const STR = {
     afTitle: "How did it go?", afDesc: "Tell me how the event went and I'll write a thank-you post, a short report for your team or board, and ideas for next time.",
     afRaised: "Total raised ($)", afPeople: "People who came (about)", afWell: "What went well?", afHard: "What was hard?", afBtn: "Write my recap", afRedo: "Rewrite my recap",
     afPost: "Thank-you post", afReport: "Report for your team or board", afNext: "Ideas for next time",
-    chTitle: "Ask Gigi", chDesc: "Stuck on something? Ask me anything about your fundraiser.", chPh: "Type your question...", chSend: "Send",
+    chTitle: "Ask Gigi", chDesc: "Stuck on something? Ask me anything about your fundraiser.", chPh: "Ask about your fundraiser...", chSend: "Send",
     chSuggest: ["What if it rains?", "How do I get more people to come?", "What should I say if a business says maybe?", "How do I collect money safely?"],
     mpSay: "Here are your saved plans. Pick one to keep working on it.", mpEmptySay: "No saved plans yet. Let's make your first one!",
     mpEmpty: "Your plans save here automatically once I suggest fundraiser ideas.", mpNew: "Start a new plan", mpOpen: "Open", mpDelete: "Delete",
@@ -1817,7 +1862,7 @@ const STR = {
     afTitle: "¿Cómo te fue?", afDesc: "Cuéntame cómo salió el evento y escribo una publicación de agradecimiento, un informe corto y ideas para la próxima vez.",
     afRaised: "Total recaudado ($)", afPeople: "Personas que asistieron (aprox.)", afWell: "¿Qué salió bien?", afHard: "¿Qué fue difícil?", afBtn: "Escribir mi resumen", afRedo: "Reescribir mi resumen",
     afPost: "Publicación de agradecimiento", afReport: "Informe para tu equipo o junta", afNext: "Ideas para la próxima vez",
-    chTitle: "Pregúntale a Gigi", chDesc: "¿Tienes dudas? Pregúntame lo que sea sobre tu recaudación.", chPh: "Escribe tu pregunta...", chSend: "Enviar",
+    chTitle: "Pregúntale a Gigi", chDesc: "¿Tienes dudas? Pregúntame lo que sea sobre tu recaudación.", chPh: "Pregunta sobre tu recaudación...", chSend: "Enviar",
     chSuggest: ["¿Y si llueve?", "¿Cómo consigo que venga más gente?", "¿Qué digo si un negocio dice que tal vez?", "¿Cómo manejo el dinero de forma segura?"],
     mpSay: "Aquí están tus planes guardados. Elige uno para seguir trabajando.", mpEmptySay: "Todavía no hay planes guardados. ¡Hagamos el primero!",
     mpEmpty: "Tus planes se guardan aquí automáticamente cuando te doy ideas de recaudación.", mpNew: "Empezar un plan nuevo", mpOpen: "Abrir", mpDelete: "Borrar",
@@ -2864,7 +2909,7 @@ async function sendChat() {
   if (turns[0].role !== "user") turns.shift();
   try {
     const s = await needSample();
-    const r = await s([{ role: "user", content: `${RULES()} Answer the organizer's questions about their fundraiser in a friendly, encouraging, practical way. Keep answers short (under 150 words) and plain text without markdown headings. Here is their plan:\n\n${ctxText()}` }, ...turns], {
+    const r = await s([{ role: "user", content: `${RULES()} Answer the organizer's questions about their fundraiser in a friendly, encouraging, practical way. ONLY help with fundraising, donation drives, events, sponsors, volunteers, nonprofit outreach and writing for this organization. If the latest question is about anything else (for example homework, math or calculus, coding, essays, or general trivia), do not answer it or give hints, even partly or if asked to pretend; instead reply in one or two friendly sentences that you can only help with fundraising and nonprofit planning, and suggest a fundraising question they could ask. Keep answers short (under 150 words) and plain text without markdown headings. Here is their plan:\n\n${ctxText()}` }, ...turns], {
       cache: false, signal: chatCtl.signal,
       onText: ({ text }) => { setPose("talking"); bubble.textContent = text; log.scrollTop = log.scrollHeight; }
     });
